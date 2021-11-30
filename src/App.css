@@ -64,8 +64,12 @@
 }
 .card .cardOptions {
   color: #00A3FF;
-  width: 10%;
+  width: 20%;
   display: flex;
   justify-content: space-between;
+}
+button {
+  background: none;
+  border: none;
 }
 /*# sourceMappingURL=App.css.map */
