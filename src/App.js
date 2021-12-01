@@ -24,17 +24,24 @@ class App extends Component {
         {
           titleText: 'Custom title',
           bodyText: 'Custom body text',
-          cardId: "",
+          cardId: 0,
         },
       ],
     };
   }
 
   //Duplicate card on click
-  addNewCard = () => {
+  addNewCard = (id) => {
     let newCard = [...this.state.cards];
-    newCard.push("newCard");
+    newCard.push(
+      {
+        titleText: 'Custom title',
+        bodyText: 'Custom body text',
+        cardId: id
+      },
+    );
     this.setState({ cards: newCard });
+    console.log("from new card", this.id)
   };
 
   removeCard = (index) => {
@@ -104,13 +111,13 @@ class App extends Component {
 
     //collect card id
     let id;
-    console.log(this.state.cards[0].titleText);
+
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
       id = {index};
       console.log(id);
-
+      console.log(this.state.cards);
       return (
         <div className="card" key={index} id={'card-'+index} data-id={index}>
           {/* {this.handleChange} */}
@@ -126,7 +133,7 @@ class App extends Component {
               <Button
                 type="link"
                 size="small"
-                onClick={this.addNewCard}
+                onClick={() => {this.addNewCard(id.index + 1)}}
                 icon={
                   <img src={duplicate} alt="click here to add a new card" />
                 }
