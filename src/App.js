@@ -16,8 +16,8 @@ import Header from "./Components/Header";
 import Aside from "./Components/Aside";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       asideOpen: false,
       cards: ["card"],
@@ -36,7 +36,6 @@ class App extends Component {
 
   removeCard = (index) => {
     if (this.state.cards.length === 1) {
-      console.log("default cannot delete");
       return;
     } else {
       const currentCards = [...this.state.cards];
@@ -79,17 +78,17 @@ class App extends Component {
 
   handleChange = (e) => {
     this.setState({
-      titleText: e.target.value,
+      titleText: this.props.titleText,
       bodyText: e.target.value
     })
   }
 
   render() {
     this.checkCardsLeft();
-    
+
     //collect card id
     let id;
-
+    console.log(this.state);
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
