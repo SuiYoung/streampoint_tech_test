@@ -4,7 +4,6 @@ import StyleForm from './StyleForm';
 
 //import tabs and tabpain from antd
 import { Tabs } from 'antd';
-import { Button } from 'antd';
 
 //import css for the antd design for react
 // import 'antd/dist/antd.css';

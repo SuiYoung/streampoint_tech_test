@@ -73,6 +73,8 @@ class App extends Component {
     this.setState({ asideOpen: !this.state.asideOpen });
   };
 
+  
+
   render() {
     this.checkCardsLeft();
     let cards;
