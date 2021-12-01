@@ -113,4 +113,13 @@ button {
   display: flex;
   justify-content: center;
 }
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+label input,
+label textarea {
+  border: 1px solid #E0E0E0;
+}
 /*# sourceMappingURL=App.css.map */

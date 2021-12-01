@@ -1,8 +1,6 @@
-// a couple of functions from the React library
 import React from 'react';
-
-//import color picker;
-import { BlockPicker  } from 'react-color';
+import Form from './Form';
+import StyleForm from './StyleForm';
 
 //import tabs and tabpain from antd
 import { Tabs } from 'antd';
@@ -25,7 +23,7 @@ const Aside = (props) => {
     // give new class to aside via variable
     let drawer = 'sideDrawer';
 
-    // if the state for asideOpen changes to true, then add on second class of open
+    // if the state for asideOpen changes to true, then add on second class of open for additional css styling
     if (props.show) {
         drawer = "sideDrawer open";
     }
@@ -39,15 +37,16 @@ const Aside = (props) => {
     const settings = <FontAwesomeIcon icon={faCog} />;
     const styles = <FontAwesomeIcon icon={faPaintRoller} />;
 
+    
+
     return (
         <aside className={drawer}>
             <Tabs defaultActiveKey="1" onChange={callback}>
                 <TabPane tab={settings} key="1">
-                    form for content goes here
+                    <Form />
                 </TabPane>
                 <TabPane tab={styles} key="2">
-                    style stuff
-                    <BlockPicker />
+                    <StyleForm />
                 </TabPane>
             </Tabs>
         </aside>
