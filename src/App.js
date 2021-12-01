@@ -41,7 +41,6 @@ class App extends Component {
       },
     );
     this.setState({ cards: newCard });
-    console.log("from new card", this.id)
   };
 
   removeCard = (index) => {
@@ -68,7 +67,7 @@ class App extends Component {
 
     //function to slide drawer on click
     // function to slide the aside in and out.
-    toggleAside = () => {
+    toggleAside = (e) => {
       //***alternative method:
       // if (this.state.asideOpen === false) {
       //   let newState = {
@@ -84,6 +83,13 @@ class App extends Component {
       //   this.setState(newState);
       // }
       this.setState({ asideOpen: !this.state.asideOpen });
+
+      //click this to collect ID of the specific card.
+      let cardIdentity = e.target.closest('.card');
+
+      let cardId = cardIdentity.getAttribute('id');
+
+      console.log(cardId);
     };
 
     //set toggle off when clicking off the aside only if the aside is open.
@@ -96,7 +102,7 @@ class App extends Component {
     }
 
     //callback function to pull form input data from aside form child components.
-    handleChangeValue = (e, newContent) => {
+    handleChangeValue = (newContent) => {
       console.log(newContent)
       // this.setState({
         

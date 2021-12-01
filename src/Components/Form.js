@@ -8,20 +8,19 @@ class Form extends Component {
             bodyText:"",
             cardID:""
         };
-        console.log(this.props);
     }
 
     
     render() {
-        let changes= this.props.onChangeValue;
         
         const handleSubmit = (e) => {
                 e.preventDefault();
                 console.log(this.state)
 
-                let newContent=this.state;
+                console.log(this.props);
 
-                changes(newContent);
+                this.props.onChangeValue(this.state);
+                
                 // just as a confirmation
                 alert(`you've entered: ${this.state.titleText}, for the title, and: ${this.state.bodyText}, for your body.`)
             }
