@@ -29,9 +29,6 @@ class App extends Component {
     };
   }
   
-  componentDidMount() {
-    window.addEventListener("click", this.hideAside)
-  }
   
   render() {
     //functionality codes here:
@@ -43,6 +40,12 @@ class App extends Component {
         return { asideOpen: !prevState.asideOpen };
       });
     };
+
+    let closeDrawer = () => {
+      this.setState({
+        asideOpen: false
+      })
+    }
 
     //Duplicate card on click
     let addNewCard;
@@ -81,7 +84,10 @@ class App extends Component {
 
     let cards;
     cards = this.state.cards.map((card, index) => {
-      return <div className="card" key={index} id={card}>           
+      // let cardId = {"card" + index};
+      
+      // console.log({cardId});
+      return <div className="card" key={index} id={"card-"+index}>           
             <div className="cardTitle">
                 {/* This will be a component that recieves input via props */}
                 <h2>Custom Title</h2> 
@@ -104,7 +110,6 @@ class App extends Component {
     
     return(
       <div className="app">
-        {/* header: SPSASGMT */}
         <header>
           <Header />
         </header>
