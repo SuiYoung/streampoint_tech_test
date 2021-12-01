@@ -92,7 +92,7 @@ button {
   position: absolute;
   z-index: 2;
   top: 7.5vh;
-  right: -16px;
+  right: 0px;
 }
 .sideDrawer .open {
   right: 10vw;
@@ -136,7 +136,7 @@ label textarea {
 }
 .styleForm .formFieldSet {
   margin-top: 1rem;
-  border-bottom: #F2F2F2;
+  border-bottom: 1px solid #F2F2F2;
 }
 .styleForm .formFlex {
   width: 80%;
