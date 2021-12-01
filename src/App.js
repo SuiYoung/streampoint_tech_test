@@ -23,12 +23,14 @@ import Aside from "./Components/Aside";
 class App extends Component {
   constructor() {
     super();
+
+    this.cardRef=React.createRef();
+
     this.state={
       asideOpen: false,
       cards:[ 'card' ]
     };
   }
-  
   
   render() {
     //functionality codes here:
@@ -36,9 +38,23 @@ class App extends Component {
     // function to slide the aside in and out.
     let toggle;
     toggle = () => {
-      this.setState(prevState => {
-        return { asideOpen: !prevState.asideOpen };
-      });
+      if (this.state.asideOpen === false) {
+      let newState = {
+        asideOpen: true,
+        cards: [...this.state.cards],
+      };
+      this.setState(newState);
+    } else {
+      let newState = {
+        asideOpen: false,
+        cards: [...this.state.cards],
+      };
+      this.setState(newState);
+    }
+      // this.setState(prevState => {
+      //   console.log('togglestate changing')
+      //   return { asideOpen: !prevState.asideOpen };
+      // });
     };
 
     let closeDrawer = () => {
@@ -58,9 +74,7 @@ class App extends Component {
     let removeCard;
     removeCard = (index) => {
         if (this.state.cards.length === 1) {
-          console.log('default cannot delete');
-          return null;
-          
+          return ;
         } else {
           const currentCards = [...this.state.cards];
           currentCards.splice(index, 1);
@@ -77,21 +91,23 @@ class App extends Component {
     }
 
     //define the styling drawer
-    let drawer;
-    if (this.state.asideOpen) {
-      drawer = <Aside toggle={toggle}/>;
+    let drawer = this.state.asideOpen === true ? <Aside /> : null;
+    
+    let collectCardId = (e) => {
+      console.log(e.currentTarget.id);
     }
+
+    let customTitle;
+    let customBody;
 
     let cards;
     cards = this.state.cards.map((card, index) => {
-      // let cardId = {"card" + index};
       
-      // console.log({cardId});
       return <div className="card" key={index} id={"card-"+index}>           
             <div className="cardTitle">
                 {/* This will be a component that recieves input via props */}
-                <h2>Custom Title</h2> 
-                <div class="cardOptions">
+                <h2>Custom Title {customTitle}</h2> 
+                <div class="cardOptions" onClick={collectCardId}>
                     <Button type="link" size="small" onClick={toggle} icon={<img src={edit} alt="click here to style your card" />}>
                     </Button>
                     <Button type="link" size="small" onClick={addNewCard} icon={<img src={duplicate} alt="click here to add a new card" />}>
@@ -103,18 +119,19 @@ class App extends Component {
             </div>
             <div className="cardBody">
                 {/* This will be a component that recieves input via props */}
-                <p>Custom Body Text</p>
+                <p>Custom Body Text{customBody}</p>
             </div>
         </div>
       })
     
+
+      
     return(
-      <div className="app">
+      <div className="app" onClick={() => toggle()}>
         <header>
           <Header />
         </header>
-
-        {drawer}
+        <div onClick={() => toggle()}>{drawer}</div>
 
         <main>
           {cards}
@@ -125,9 +142,6 @@ class App extends Component {
   }
 
   
-
-  //pencil to edit content
-
 }
 
 

@@ -6,6 +6,7 @@ import { BlockPicker  } from 'react-color';
 
 //import tabs and tabpain from antd
 import { Tabs } from 'antd';
+import { Button } from 'antd';
 
 //import css for the antd design for react
 import 'antd/dist/antd.css';
@@ -19,7 +20,7 @@ import { faCog, faPaintRoller } from '@fortawesome/free-solid-svg-icons';
 library.add(fab, faCog, faPaintRoller )
 
 
-const Aside = (props, {toggle}) => {
+const Aside = (props) => {
 
     // give new class to aside via variable
     let drawer = 'sideDrawer';
@@ -46,9 +47,9 @@ const Aside = (props, {toggle}) => {
                 </TabPane>
                 <TabPane tab={styles} key="2">
                     style stuff
+                    <BlockPicker />
                 </TabPane>
             </Tabs>
-            {/* <BlockPicker /> */}
         </aside>
     );
 }
