@@ -1,7 +1,25 @@
 // a couple of functions from the React library
 import React from 'react';
 
-const Aside = props => {
+//import color picker;
+import { BlockPicker  } from 'react-color';
+
+//import tabs and tabpain from antd
+import { Tabs } from 'antd';
+
+//import css for the antd design for react
+import 'antd/dist/antd.css';
+
+//import fontawesomeicon from fontawesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faCog, faPaintRoller } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fab, faCog, faPaintRoller )
+
+
+const Aside = (props, {toggle}) => {
 
     // give new class to aside via variable
     let drawer = 'sideDrawer';
@@ -11,18 +29,26 @@ const Aside = props => {
         drawer = "sideDrawer open";
     }
 
+    const { TabPane } = Tabs;
+
+    function callback(key) {
+        console.log(key);
+    }
+
+    const settings = <FontAwesomeIcon icon={faCog} />;
+    const styles = <FontAwesomeIcon icon={faPaintRoller} />;
+
     return (
         <aside className={drawer}>
-            <div className="instrContainer">
-                <h3>How To Use:</h3>
-                <ol>
-                    <li><span className="blueFont">[tab]</span>-to or click into the input field and type your message.</li>
-                    <li>Press <span className="blueFont">[enter]</span> or <span className="blueFont">[tab]</span> to the send button (the paper airplane)</li>
-                    <li>Your message will appear above!</li>
-                    <li>Click <span className="blueFont">[New User]</span> button at the top right to give a new user name!</li>
-                    <li>To clear your last message Click the "<i className="fas fa-trash-alt"></i>"!</li>
-                </ol>
-            </div>
+            <Tabs defaultActiveKey="1" onChange={callback}>
+                <TabPane tab={settings} key="1">
+                    form for content goes here
+                </TabPane>
+                <TabPane tab={styles} key="2">
+                    style stuff
+                </TabPane>
+            </Tabs>
+            {/* <BlockPicker /> */}
         </aside>
     );
 }

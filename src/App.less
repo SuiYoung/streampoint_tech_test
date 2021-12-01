@@ -64,3 +64,53 @@ button {
     background:none;
     border: none;
 }
+
+.sideDrawer {
+    width: 30vw;
+    height: 100vh;
+    background: white;
+    border-radius: 16px 0 0 0;
+    box-shadow: 1px 1px 24px 4px rgba(0, 0, 0, 0.055);
+    display:flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    top: 7.5vh;
+    right: 0;
+
+    .open {
+        right: 10vw;
+        transition: cubic-bezier(1, 0, 0, 1) all .5s;
+    }
+
+    //adjust tabs styles
+    .ant-tabs {
+        width:100%;
+    }
+    
+    .ant-tabs-nav-list {
+        width: 100%;
+    }
+
+    .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap, 
+    .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap,
+    .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, 
+    .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .ant-tabs-tab,
+    .ant-tabs-tab-active,
+    .ant-tabs-nav-list {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .ant-tabs-content-holder {
+        padding: 0 1rem;
+        display:flex;
+        justify-content: center;
+    }
+
+}

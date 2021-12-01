@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import './App.css'; 
 
 //import css for the antd design for react
-import 'antd/dist/antd.less';
+import 'antd/dist/antd.css';
 
 //import image assets
 import duplicate from './assets/duplicate-ant-design_copy-twotone.png';
@@ -28,7 +28,19 @@ class App extends Component {
       cards:[ 'card' ]
     };
   }
+
+  let hideAside;
+    hideAside = () => {
+      if (this.state.asideOpen == true) {
+        this.setState({
+          asideOpen: false,
+        })
+      }
+    }
   
+  componentDidMount() {
+    window.addEventListener("click", this.hideAside)
+  }
   
   render() {
     //functionality codes here:
@@ -61,14 +73,8 @@ class App extends Component {
           this.setState({ cards: currentCards });
         }
     }
-
-    //define the styling drawer
-    let drawer;
-    if (this.state.asideOpen) {
-      drawer = <Aside />;
-    }
-
-    //define gray out options for the delete card button
+    
+    //define gray out options for the delete card button if there is only 1 card; gray-out the trash can.
     let deleteButtonOptions;
     if (this.state.cards.length === 1) {
         deleteButtonOptions = deleteButtonGray;
@@ -76,9 +82,15 @@ class App extends Component {
         deleteButtonOptions = deleteButton;
     }
 
+    //define the styling drawer
+    let drawer;
+    if (this.state.asideOpen) {
+      drawer = <Aside toggle={toggle}/>;
+    }
+
     let cards;
     cards = this.state.cards.map((card, index) => {
-      return <div className="card" key={index} id="index-'${card}`-`${index}`">           
+      return <div className="card" key={index} id={card}>           
             <div className="cardTitle">
                 {/* This will be a component that recieves input via props */}
                 <h2>Custom Title</h2> 
@@ -97,7 +109,6 @@ class App extends Component {
                 <p>Custom Body Text</p>
             </div>
         </div>
-      // console.log(card, index);
       })
     
     return(
@@ -109,7 +120,6 @@ class App extends Component {
 
         {drawer}
 
-        {/* <Card /> */}
         <main>
           {cards}
         </main>
@@ -119,9 +129,7 @@ class App extends Component {
   }
 
   
-  //need cards; default 1 card: Custom title, and custom body text
-  // press duplicate card to create another card where the user can add more customizable cards
-  //press trashcan to delete the card
+
   //pencil to edit content
 
 }
