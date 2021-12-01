@@ -9,22 +9,23 @@ class Form extends Component {
             cardID:""
         };
     }
-    // set callback from parent to retrieve state from this child class component
-
-    handleInputChange = (e) => {
-            this.setState({ 
-                titleText: e.target.value,
-                bodyText: e.target.value
-            });
-        }
         
         render() {
             console.log (this.onChangeValue);
             const handleSubmit = (e) => {
                 e.preventDefault();
                 console.log(this.state)
-            alert(`you've entered: ${this.state.titleText} for the title, and ${this.state.bodyText} for your body.`)
+                let newContent=this.state;
+                // just as a confirmation
+                alert(`you've entered: ${this.state.titleText}, for the title, and: ${this.state.bodyText}, for your body.`)
             }
+
+            const onEnterPress = e => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  // e.preventDefault();
+                  handleSubmit(); // this won't be triggered
+                }
+            };
 
             return(
             <form onSubmit={handleSubmit}>
@@ -51,10 +52,11 @@ class Form extends Component {
                     
                         this.setState({ bodyText: e.target.value })
                         }}
+                        onKeyPress={onEnterPress}
                     >
                     </textarea>
                 </label>
-                <input type="submit" onClick={this.onChangeValue} /> 
+                <input className="hiddenInput" type="submit" onClick={this.onChangeValue} /> 
             </form>
             
             ) 

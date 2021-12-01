@@ -22,14 +22,11 @@ class App extends Component {
       asideOpen: false,
       cards: [
         {
-        'card': 'card',
-        titleText: 'Custom title',
-        bodyText: 'Custom body text'
+          titleText: 'Custom title',
+          bodyText: 'Custom body text',
+          cardId: "",
         },
       ],
-      titleText:"",
-      bodyText:"",
-      cardID:""
     };
   }
 
@@ -51,59 +48,63 @@ class App extends Component {
     }
   };
 
-  //define gray out options for the delete card button if there is only 1 card; gray-out the trash can.
-  checkCardsLeft = () => {
-    if (this.state.cards.length === 1) {
-      this.deleteButtonOptions = deleteButtonGray;
-    } else {
-      this.deleteButtonOptions = deleteButton;
-    }
-  };
-
-  //functionality codes here:
-
-  //function to slide drawer on click
-  // function to slide the aside in and out.
-  toggleAside = () => {
-    //***alternative method:
-    // if (this.state.asideOpen === false) {
-    //   let newState = {
-    //     asideOpen: true,
-    //     cards: [...this.state.cards],
-    //   };
-    //   this.setState(newState);
-    // } else {
-    //   let newState = {
-    //     asideOpen: false,
-    //     cards: [...this.state.cards],
-    //   };
-    //   this.setState(newState);
-    // }
-    this.setState({ asideOpen: !this.state.asideOpen });
-  };
-
-  toggleOff = () => {
-    if (this.state.asideOpen === true) {
-      this.toggleAside()
-    } else {
-      return;
+    //define gray out options for the delete card button if there is only 1 card; gray-out the trash can.
+    checkCardsLeft = () => {
+      if (this.state.cards.length === 1) {
+        this.deleteButtonOptions = deleteButtonGray;
+      } else {
+        this.deleteButtonOptions = deleteButton;
+      }
     };
-  }
 
-  handleChangeValue = (e) => {
-    this.setState({
-      titleText: e.props.value,
-      bodyText: e.props.value
-    })
-    console.log(this.state)
-  }
+    //functionality codes here:
+
+    //function to slide drawer on click
+    // function to slide the aside in and out.
+    toggleAside = () => {
+      //***alternative method:
+      // if (this.state.asideOpen === false) {
+      //   let newState = {
+      //     asideOpen: true,
+      //     cards: [...this.state.cards],
+      //   };
+      //   this.setState(newState);
+      // } else {
+      //   let newState = {
+      //     asideOpen: false,
+      //     cards: [...this.state.cards],
+      //   };
+      //   this.setState(newState);
+      // }
+      this.setState({ asideOpen: !this.state.asideOpen });
+    };
+
+    //set toggle off when clicking off the aside only if the aside is open.
+    toggleOff = () => {
+      if (this.state.asideOpen === true) {
+        this.toggleAside()
+      } else {
+        return;
+      };
+    }
+
+    //callback function to pull form input data from aside form child components.
+    handleChangeValue = (e, newContent) => {
+      console.log(newContent)
+      // this.setState({
+        
+      // })
+    }
+
+
+
 
   render() {
     this.checkCardsLeft();
 
     //collect card id
     let id;
-    console.log(this.state);
+    console.log(this.state.cards[0].titleText);
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
@@ -112,10 +113,9 @@ class App extends Component {
 
       return (
         <div className="card" key={index} id={'card-'+index} data-id={index}>
-          {this.handleChange}
+          {/* {this.handleChange} */}
           <div className="cardTitle">
-            {this.state.titleText}
-            <h2>Custom Title</h2>
+            <h2>{this.state.cards[index].titleText}</h2>
             <div class="cardOptions">
               <Button
                 type="link"
@@ -146,13 +146,17 @@ class App extends Component {
           </div>
           <div className="cardBody">
             {/* This will be a component that recieves input via props */}
-            <p>Custom Body Text</p>
+            <p>{this.state.cards[index].bodyText}</p>
           </div>
         </div>
       );
     });
 
+    //written ternary syntax alternative to conditional if statement
     let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} /> : null;
+
+
+
 
     return (
       <div className="app">

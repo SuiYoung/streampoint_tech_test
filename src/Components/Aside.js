@@ -27,12 +27,14 @@ const Aside = (props, onChangeValue) => {
         drawer = "sideDrawer open";
     }
 
+    //set up for ant-design tabs
     const { TabPane } = Tabs;
 
     function callback(key) {
         console.log(key);
     }
 
+    //used font awesome icons to allow for color changes on active tab (fontawesome npm package)
     const settings = <FontAwesomeIcon icon={faCog} />;
     const styles = <FontAwesomeIcon icon={faPaintRoller} />;
 
@@ -42,6 +44,7 @@ const Aside = (props, onChangeValue) => {
         <aside className={drawer}>
             <Tabs defaultActiveKey="1" onChange={callback}>
                 <TabPane tab={settings} key="1">
+                    {/* filter down parent callback function */}
                     <Form onChangeValue={onChangeValue} />
                 </TabPane>
                 <TabPane tab={styles} key="2">
