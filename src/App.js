@@ -56,20 +56,21 @@ class App extends Component {
   //function to slide drawer on click
   // function to slide the aside in and out.
   toggleAside = () => {
-    if (this.state.asideOpen === false) {
-      let newState = {
-        asideOpen: true,
-        cards: [...this.state.cards],
-      };
-      this.setState(newState);
-    } else {
-      let newState = {
-        asideOpen: false,
-        cards: [...this.state.cards],
-      };
-      this.setState(newState);
-    }
-    // this.setState({ asideOpen: !this.state.asideOpen });
+    //***alternative method:
+    // if (this.state.asideOpen === false) {
+    //   let newState = {
+    //     asideOpen: true,
+    //     cards: [...this.state.cards],
+    //   };
+    //   this.setState(newState);
+    // } else {
+    //   let newState = {
+    //     asideOpen: false,
+    //     cards: [...this.state.cards],
+    //   };
+    //   this.setState(newState);
+    // }
+    this.setState({ asideOpen: !this.state.asideOpen });
   };
 
   render() {
@@ -129,7 +130,7 @@ class App extends Component {
 
         {/* <div onClick={() => this.toggleAside()}>{drawer}</div> */}
 
-        <main>{cards}</main>
+        <main onClick={() => this.toggleAside()}>{cards}</main>
       </div>
     );
   }

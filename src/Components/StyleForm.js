@@ -29,7 +29,7 @@ class StyleForm extends Component {
                 g: '112',
                 b: '19',
                 a: '1',
-                }
+                },
             }
         }
 
@@ -112,7 +112,7 @@ class StyleForm extends Component {
                     },
                 },
             });
-
+            
         return(
             <form className="styleForm">
                 <div className="formFieldSet">
