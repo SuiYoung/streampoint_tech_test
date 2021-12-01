@@ -10068,7 +10068,7 @@
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
 
-"reactcss@^1.2.0":
+"reactcss@^1.2.0", "reactcss@^1.2.3":
   "integrity" "sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A=="
   "resolved" "https://registry.npmjs.org/reactcss/-/reactcss-1.2.3.tgz"
   "version" "1.2.3"

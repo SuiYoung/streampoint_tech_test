@@ -125,7 +125,9 @@ class App extends Component {
           <Header />
         </header>
 
-        <div onClick={() => this.toggleAside()}>{drawer}</div>
+        {drawer}
+
+        {/* <div onClick={() => this.toggleAside()}>{drawer}</div> */}
 
         <main>{cards}</main>
       </div>

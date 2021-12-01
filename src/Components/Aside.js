@@ -7,7 +7,7 @@ import { Tabs } from 'antd';
 import { Button } from 'antd';
 
 //import css for the antd design for react
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 //import fontawesomeicon from fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
