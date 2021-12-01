@@ -21,6 +21,9 @@ class App extends Component {
     this.state = {
       asideOpen: false,
       cards: ["card"],
+      titleText:"",
+      bodyText:"",
+      cardID:""
     };
   }
 
@@ -53,6 +56,7 @@ class App extends Component {
   };
 
   //functionality codes here:
+
   //function to slide drawer on click
   // function to slide the aside in and out.
   toggleAside = () => {
@@ -73,16 +77,30 @@ class App extends Component {
     this.setState({ asideOpen: !this.state.asideOpen });
   };
 
-  
+  handleChange = (e) => {
+    this.setState({
+      titleText: e.target.value,
+      bodyText: e.target.value
+    })
+  }
 
   render() {
     this.checkCardsLeft();
+    
+    //collect card id
+    let id;
+
+    //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
+      id = {index};
+      console.log(id);
+
       return (
-        <div className="card" key={index} id={card}>
+        <div className="card" key={index} id={'card-'+index} data-id={index}>
+          {this.handleChange}
           <div className="cardTitle">
-            {/* This will be a component that recieves input via props */}
+            {this.state.titleText}
             <h2>Custom Title</h2>
             <div class="cardOptions">
               <Button

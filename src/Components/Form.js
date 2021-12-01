@@ -5,11 +5,12 @@ class Form extends Component {
         super();
         this.state={
             titleText:"",
-            bodyText:""
+            bodyText:"",
+            cardID:""
         };
     }
     // set callback from parent to retrieve state from this child class component
-    
+
     handleInputChange = (e) => {
             this.setState({ 
                 titleText: e.target.value,
