@@ -20,7 +20,13 @@ class App extends Component {
     super(props);
     this.state = {
       asideOpen: false,
-      cards: ["card"],
+      cards: [
+        {
+        'card': 'card',
+        titleText: 'Custom title',
+        bodyText: 'Custom body text'
+        },
+      ],
       titleText:"",
       bodyText:"",
       cardID:""
@@ -76,9 +82,9 @@ class App extends Component {
     this.setState({ asideOpen: !this.state.asideOpen });
   };
 
-  handleChange = (e) => {
+  handleChangeValue = (e) => {
     this.setState({
-      titleText: this.props.titleText,
+      titleText: e.target.value,
       bodyText: e.target.value
     })
   }
@@ -137,7 +143,7 @@ class App extends Component {
       );
     });
 
-    let drawer = this.state.asideOpen === true ? <Aside /> : null;
+    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} /> : null;
 
     return (
       <div className="app">

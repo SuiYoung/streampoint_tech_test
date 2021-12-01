@@ -17,7 +17,7 @@ import { faCog, faPaintRoller } from '@fortawesome/free-solid-svg-icons';
 library.add(fab, faCog, faPaintRoller )
 
 
-const Aside = (props) => {
+const Aside = (props, onChangeValue) => {
 
     // give new class to aside via variable
     let drawer = 'sideDrawer';
@@ -42,7 +42,7 @@ const Aside = (props) => {
         <aside className={drawer}>
             <Tabs defaultActiveKey="1" onChange={callback}>
                 <TabPane tab={settings} key="1">
-                    <Form />
+                    <Form onChangeValue={onChangeValue} />
                 </TabPane>
                 <TabPane tab={styles} key="2">
                     <StyleForm />
