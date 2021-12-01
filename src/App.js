@@ -28,18 +28,10 @@ class App extends Component {
       cards:[ 'card' ]
     };
   }
-
-  //   hideAside = () => {
-  //     if (this.state.asideOpen == true) {
-  //       this.setState({
-  //         asideOpen: false,
-  //       })
-  //     }
-  //   }
   
-  // componentDidMount() {
-  //   window.addEventListener("click", this.hideAside)
-  // }
+  componentDidMount() {
+    window.addEventListener("click", this.hideAside)
+  }
   
   render() {
     //functionality codes here:
