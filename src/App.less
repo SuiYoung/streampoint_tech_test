@@ -66,7 +66,7 @@ button {
 }
 
 .sideDrawer {
-    width: 30vw;
+    width: 35vw;
     height: 100vh;
     background: white;
     border-radius: 16px 0 0 0;
@@ -76,7 +76,7 @@ button {
     position: absolute;
     z-index: 2;
     top: 7.5vh;
-    right: 0;
+    right: -16px;
 
     .open {
         right: 10vw;
@@ -123,5 +123,46 @@ label {
     input,
     textarea {
         border: 1px solid #E0E0E0;
+    }
+}
+
+.styleForm{
+    h3 {
+        color: #00A3FF;
+    }
+    .formFieldSet {
+        margin-top: 1rem;
+        border-bottom:#F2F2F2;
+    }
+
+    .formFlex {
+        width:80%;
+        display:flex;
+
+        input {
+            width:90%;
+            height: 40px;
+        }
+
+        label {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .blockPicker1,
+    .blockPicker2,
+    .blockPicker3 {
+        right: 4rem;
+    }
+
+    .blockPicker1 {
+        top: 3.5rem;
+    }
+
+    .blockPicker2 {
+        top:3.5rem;
+    }
+    .blockPicker3 {
+        top:3.5rem;
     }
 }

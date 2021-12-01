@@ -73,7 +73,7 @@ button {
   border: none;
 }
 .sideDrawer {
-  width: 30vw;
+  width: 35vw;
   height: 100vh;
   background: white;
   border-radius: 16px 0 0 0;
@@ -83,7 +83,7 @@ button {
   position: absolute;
   z-index: 2;
   top: 7.5vh;
-  right: 0;
+  right: -16px;
 }
 .sideDrawer .open {
   right: 10vw;
@@ -121,5 +121,37 @@ label {
 label input,
 label textarea {
   border: 1px solid #E0E0E0;
+}
+.styleForm h3 {
+  color: #00A3FF;
+}
+.styleForm .formFieldSet {
+  margin-top: 1rem;
+  border-bottom: #F2F2F2;
+}
+.styleForm .formFlex {
+  width: 80%;
+  display: flex;
+}
+.styleForm .formFlex input {
+  width: 90%;
+  height: 40px;
+}
+.styleForm .formFlex label {
+  margin-bottom: 1rem;
+}
+.styleForm .blockPicker1,
+.styleForm .blockPicker2,
+.styleForm .blockPicker3 {
+  right: 4rem;
+}
+.styleForm .blockPicker1 {
+  top: 3.5rem;
+}
+.styleForm .blockPicker2 {
+  top: 3.5rem;
+}
+.styleForm .blockPicker3 {
+  top: 3.5rem;
 }
 /*# sourceMappingURL=App.css.map */
