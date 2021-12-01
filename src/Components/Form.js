@@ -29,14 +29,32 @@ class Form extends Component {
             return(
             <form onSubmit={handleSubmit}>
                 <label for="title">Title Text
-                    <input type="text" id="title" name="title" placeholder="Enter custom title"  onChange={(e) => {console.log( e.target.value )
-                    this.setState({ titleText: e.target.value })}}/>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        name="title" 
+                        placeholder="Enter custom title"  
+                        onChange={(e) => {
+                        console.log( e.target.value )
+                    
+                        this.setState({ titleText: e.target.value })
+                    }}/>
                 </label>
                 <label for="body">Body Text
-                    <textarea id="body" name="body" rows="5" cols="50" placeholder="Enter custom text" onChange={(e) => {console.log( e.target.value )
-                    this.setState({ bodyText: e.target.value })}}>
+                    <textarea 
+                        id="body" 
+                        name="body" 
+                        rows="5" 
+                        cols="50" 
+                        placeholder="Enter custom text" 
+                        onChange={(e) => {console.log( e.target.value )
+                    
+                        this.setState({ bodyText: e.target.value })
+                        }}
+                    >
                     </textarea>
                 </label>
+                <input type="submit" onClick={this.onChangeValue} /> 
             </form>
             
             ) 

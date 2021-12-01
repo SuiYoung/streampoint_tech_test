@@ -82,11 +82,20 @@ class App extends Component {
     this.setState({ asideOpen: !this.state.asideOpen });
   };
 
+  toggleOff = () => {
+    if (this.state.asideOpen === true) {
+      this.toggleAside()
+    } else {
+      return;
+    };
+  }
+
   handleChangeValue = (e) => {
     this.setState({
-      titleText: e.target.value,
-      bodyText: e.target.value
+      titleText: e.props.value,
+      bodyText: e.props.value
     })
+    console.log(this.state)
   }
 
   render() {
@@ -153,9 +162,7 @@ class App extends Component {
 
         {drawer}
 
-        {/* <div onClick={() => this.toggleAside()}>{drawer}</div> */}
-
-        <main onClick={() => this.toggleAside()}>{cards}</main>
+        <main onClick={() => {this.toggleOff()}}>{cards}</main>
       </div>
     );
   }
