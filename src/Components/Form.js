@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
 
 class Form extends Component {
-    constructor(onChangeValue) {
-        super(onChangeValue);
+    constructor(props) {
+        super(props);
         this.state={
             titleText:"",
             bodyText:"",
             cardID:""
         };
+        console.log(this.props);
     }
+
+    
+    render() {
+        let changes= this.props.onChangeValue;
         
-        render() {
-            console.log (this.onChangeValue);
-            const handleSubmit = (e) => {
+        const handleSubmit = (e) => {
                 e.preventDefault();
                 console.log(this.state)
+
                 let newContent=this.state;
+
+                changes(newContent);
                 // just as a confirmation
                 alert(`you've entered: ${this.state.titleText}, for the title, and: ${this.state.bodyText}, for your body.`)
             }
@@ -56,7 +62,7 @@ class Form extends Component {
                     >
                     </textarea>
                 </label>
-                <input className="hiddenInput" type="submit" onClick={this.onChangeValue} /> 
+                <input className="hiddenInput" type="submit" onClick={this.props.onChangeValue} /> 
             </form>
             
             ) 
