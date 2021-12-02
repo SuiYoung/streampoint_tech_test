@@ -20,9 +20,10 @@ class App extends Component {
     super(props);
     this.state = {
       asideOpen: false,
+      targetCard: null,
       cards: [
         {
-          titleText: 'Custom title',
+          titleText: 'Default card ID 0 Custom title',
           bodyText: 'Custom body text',
           cardId: 0,
         },
@@ -31,24 +32,34 @@ class App extends Component {
   }
 
   //Duplicate card on click
-  addNewCard = (id) => {
+  addNewCard = () => {
     let newCard = [...this.state.cards];
+
+    let cardsArraySize = this.state.cards.length;
     newCard.push(
       {
-        titleText: 'Custom title',
+        titleText: `Custom title-${cardsArraySize}`,
         bodyText: 'Custom body text',
-        cardId: id
+        cardId: cardsArraySize
       },
     );
     this.setState({ cards: newCard });
   };
 
-  removeCard = (index) => {
+  removeCard = (cardId) => {
     if (this.state.cards.length === 1) {
       return;
     } else {
-      const currentCards = [...this.state.cards];
-      currentCards.splice(index, 1);
+
+      let currentCards = this.state.cards;
+      for ( let [index, card] of currentCards.entries() ) {
+        if (card.cardId === cardId) {
+          currentCards.splice(index, 1);
+        }
+      }
+
+      // const currentCards = [...this.state.cards];
+      // currentCards.splice(cardId, 1);
       this.setState({ cards: currentCards });
       this.checkCardsLeft();
     }
@@ -65,9 +76,11 @@ class App extends Component {
 
     //functionality codes here:
 
+    
+
     //function to slide drawer on click
     // function to slide the aside in and out.
-    toggleAside = (e) => {
+    toggleAside = (cardId) => {
       //***alternative method:
       // if (this.state.asideOpen === false) {
       //   let newState = {
@@ -85,10 +98,8 @@ class App extends Component {
       this.setState({ asideOpen: !this.state.asideOpen });
 
       //click this to collect ID of the specific card.
-      let cardIdentity = e.target.closest('.card');
 
-      let cardId = cardIdentity.getAttribute('id');
-
+      this.setState({ targetCard: cardId })
       console.log(cardId);
     };
 
@@ -104,9 +115,19 @@ class App extends Component {
     //callback function to pull form input data from aside form child components.
     handleChangeValue = (newContent) => {
       console.log(newContent)
-      // this.setState({
-        
-      // })
+      let newCardArray = this.state.cards;
+      newCardArray = newCardArray.map((card) => {
+        if (card.cardId === this.state.targetCard) {
+          card = newContent;
+          card.cardId = this.state.targetCard;
+          return card;
+        } else {
+          return card;
+        }
+      })
+      this.setState({
+        cards: newCardArray
+      })
     }
 
 
@@ -121,25 +142,25 @@ class App extends Component {
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
-      id = {index};
+      id = card.cardid;
       console.log(id);
-      console.log(this.state.cards);
+      console.log(this.state);
       return (
         <div className="card" key={index} id={'card-'+index} data-id={index}>
           {/* {this.handleChange} */}
           <div className="cardTitle">
             <h2>{this.state.cards[index].titleText}</h2>
-            <div class="cardOptions">
+            <div className="cardOptions">
               <Button
                 type="link"
                 size="small"
-                onClick={this.toggleAside}
+                onClick={() => {this.toggleAside(card.cardId)}}
                 icon={<img src={edit} alt="click here to style your card" />}
               ></Button>
               <Button
                 type="link"
                 size="small"
-                onClick={() => {this.addNewCard(id.index + 1)}}
+                onClick={() => {this.addNewCard(card.cardId)}}
                 icon={
                   <img src={duplicate} alt="click here to add a new card" />
                 }
@@ -147,7 +168,7 @@ class App extends Component {
               <Button
                 type="link"
                 size="small"
-                onClick={this.removeCard}
+                onClick={() => {this.removeCard(card.cardId)}}
                 icon={
                   <img
                     src={this.deleteButtonOptions}
@@ -166,7 +187,7 @@ class App extends Component {
     });
 
     //written ternary syntax alternative to conditional if statement
-    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} /> : null;
+    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} currentCardId={this.state.targetCard}/> : null;
 
 
 

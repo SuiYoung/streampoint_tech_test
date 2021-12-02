@@ -21,8 +21,6 @@ class Form extends Component {
 
                 this.props.onChangeValue(this.state);
                 
-                // just as a confirmation
-                alert(`you've entered: ${this.state.titleText}, for the title, and: ${this.state.bodyText}, for your body.`)
             }
 
             const onEnterPress = e => {
@@ -34,7 +32,7 @@ class Form extends Component {
 
             return(
             <form onSubmit={handleSubmit}>
-                <label for="title">Title Text
+                <label htmlFor="title">Title Text
                     <input 
                         type="text" 
                         id="title" 
@@ -46,7 +44,7 @@ class Form extends Component {
                         this.setState({ titleText: e.target.value })
                     }}/>
                 </label>
-                <label for="body">Body Text
+                <label htmlFor="body">Body Text
                     <textarea 
                         id="body" 
                         name="body" 

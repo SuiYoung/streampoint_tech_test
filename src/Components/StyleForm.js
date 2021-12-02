@@ -112,13 +112,13 @@ class StyleForm extends Component {
                     },
                 },
             });
-            
+
         return(
             <form className="styleForm">
                 <div className="formFieldSet">
                     <h3>Title</h3>
                     <div className="formFlex">
-                        <label for="titleSize">Size
+                        <label htmlFor="titleSize">Size
                             <input type="text" id="titleSize" name="titleSize" placeholder="36px" />
                         </label>
                         <div>
@@ -138,7 +138,7 @@ class StyleForm extends Component {
                 <div className="formFieldSet">
                     <h3>Body</h3>
                     <div className="formFlex">
-                        <label for="bodyStyle">Size
+                        <label htmlFor="bodyStyle">Size
                             <input type="text" id="bodyStyle" name="bodyStyle" placeholder="16px" />
                         </label>
                         <div>
@@ -157,7 +157,7 @@ class StyleForm extends Component {
                 <div className="formFieldSet">
                     <h3>Panel</h3>
                     <div className="formFlex">
-                        <label for="panel">Corner Radius
+                        <label htmlFor="panel">Corner Radius
                             <input type="text" id="panel" name="panel" placeholder="16px" />
                         </label>
                         <div>
