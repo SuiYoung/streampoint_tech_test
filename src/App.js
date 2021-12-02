@@ -137,9 +137,21 @@ class App extends Component {
     handleStyleChange = (newStyleContent) => {
       console.log(newStyleContent);
       let newStylesArray = this.state.cards;
-      newStylesArray = newStylesArray.map((card) => {
+      newStylesArray = newStylesArray.map((card, index) => {
         if ( card.cardId === this.state.targetCard) {
-          console.log(card);
+          card = newStylesArray;
+          // console.log('card in map ',card);
+          // console.log('card.cardId ', card[card.cardId].titleSize);
+          // console.log(newStyleContent.titleSize);
+          console.log(index);
+          card[index].titleSize = newStyleContent.titleSize;
+          card[index].titleColor = newStyleContent.titleColor;
+          card[index].bodySize = newStyleContent.bodySize;
+          card[index].bodyColor = newStyleContent.bodyColor;
+          card[index].panelCorners = newStyleContent.panelCorners;
+          card[index].panelColor = newStylesArray.panelColor;
+          console.log(card)
+          return card;
         } else {
           return card;
         }
