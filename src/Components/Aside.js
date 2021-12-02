@@ -48,7 +48,7 @@ const Aside = (props) => {
                     <Form onChangeValue={props.onChangeValue} />
                 </TabPane>
                 <TabPane tab={styles} key="2">
-                    <StyleForm />
+                    <StyleForm onStyleChange={props.onStyleChange} />
                 </TabPane>
             </Tabs>
         </aside>

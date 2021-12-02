@@ -26,6 +26,12 @@ class App extends Component {
           titleText: 'Default card ID 0 Custom title',
           bodyText: 'Custom body text',
           cardId: 0,
+          titleSize:'36px',
+          titleColor: "",
+          bodySize: '16px',
+          bodyColor: "",
+          panelCorners: '16px',
+          panelColor: "#FFFFFF"
         },
       ],
     };
@@ -76,8 +82,6 @@ class App extends Component {
 
     //functionality codes here:
 
-    
-
     //function to slide drawer on click
     // function to slide the aside in and out.
     toggleAside = (cardId) => {
@@ -100,7 +104,7 @@ class App extends Component {
       //click this to collect ID of the specific card.
 
       this.setState({ targetCard: cardId })
-      console.log(cardId);
+      // console.log(cardId);
     };
 
     //set toggle off when clicking off the aside only if the aside is open.
@@ -130,20 +134,30 @@ class App extends Component {
       })
     }
 
+    handleStyleChange = (newStyleContent) => {
+      console.log(newStyleContent);
+      let newStylesArray = this.state.cards;
+      newStylesArray = newStylesArray.map((card) => {
+        if ( card.cardId === this.state.targetCard) {
+          console.log(card);
+        } else {
+          return card;
+        }
+      })
+      // this.setState({
+
+      // })
+    }
+
 
 
 
   render() {
     this.checkCardsLeft();
 
-    //collect card id
-    let id;
-
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
-      id = card.cardid;
-      console.log(id);
       console.log(this.state);
       return (
         <div className="card" key={index} id={'card-'+index} data-id={index}>
@@ -187,7 +201,7 @@ class App extends Component {
     });
 
     //written ternary syntax alternative to conditional if statement
-    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} currentCardId={this.state.targetCard}/> : null;
+    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} onStyleChange={this.handleStyleChange} currentCardId={this.state.targetCard}/> : null;
 
 
 
