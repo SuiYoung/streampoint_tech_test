@@ -30,15 +30,26 @@ class StyleForm extends Component {
                 b: '255',
                 a: '0',
                 },
-            titleSize:'36px',
-            titleColor: "",
-            bodySize: '16px',
-            bodyColor: "",
-            panelCorners: '16px',
-            panelColor: "#FFFFFF"
-            };
-        }
+            newStyles: {
+                titleSize:'36px',
+                titleColor: "#00000",
+                bodySize: '16px',
+                bodyColor: "#00000",
+                panelCorners: '16px',
+                panelColor: "#FFFFFF"
+            }
+        };
+    }
 
+        newStyles= {
+            titleSize: "",
+            titleColor: "",
+            bodySize: "",
+            bodyColor: "",
+            panelCorners: "",
+            panelColor: ""
+        } 
+        
         handleClick = () => {
             this.setState({ displayColorPicker: !this.state.displayColorPicker })
         };
@@ -74,6 +85,18 @@ class StyleForm extends Component {
         handleChange3 = (color3) => {
             this.setState({ color3: color3.rgb })
         };
+
+        handleStyleSubmit = (newStyles) => {
+            // console.log(this.state.newStyles);
+
+            this.setState({ 
+                newStyles: newStyles
+            });
+
+            // console.log(this.state.newStyles);
+
+            this.props.onStyleChange(this.state.newStyles);
+        }
 
         render() {
 
@@ -119,28 +142,22 @@ class StyleForm extends Component {
                 },
             });
 
-            const handleStyleSubmit = (e) => {
-                e.preventDefault();
-                console.log(this.state);
-                console.log(this.props);
-
-                this.props.onStyleChange(this.state);
-            }
 
 
         return(
-            <form className="styleForm" onSubmit={handleStyleSubmit}>
+            <form className="styleForm" onSubmit={() => {this.handleStyleSubmit(this.newStyles)}}>
                 <div className="formFieldSet">
                     <h3>Title</h3>
                     <div className="formFlex">
                         <label htmlFor="titleSize">Size
                             <input type="text" id="titleSize" name="titleSize" placeholder="36px"
-                            onChange={
-                                (e) => {console.log( e.target.value )
-
-                                this.setState({titleSize: e.target.value })}
+                            onChange={ 
+                                (e) => {
+                                this.newStyles.titleSize = e.target.value;
+                                }
                             } />
                         </label>
+
                         <div>
                             <label>Color
                             <div style={ styles.swatch } onClick={ this.handleClick }>
@@ -163,14 +180,16 @@ class StyleForm extends Component {
                 <div className="formFieldSet">
                     <h3>Body</h3>
                     <div className="formFlex">
+
                         <label htmlFor="bodyStyle">Size
                             <input type="text" id="bodyStyle" name="bodyStyle" placeholder="16px"
-                            onChange={
-                                (e) => {console.log( e.target.value )
-
-                                this.setState({ bodySize: e.target.value })}
-                            } />
+                            onChange={ 
+                                (e) => {
+                                    this.newStyles.bodySize= e.target.value
+                                }
+                             } />
                         </label>
+
                         <div>
                             <label>Color
                             <div style={ styles.swatch } onClick={ this.handleClick2 }>
@@ -187,13 +206,15 @@ class StyleForm extends Component {
                 <div className="formFieldSet">
                     <h3>Panel</h3>
                     <div className="formFlex">
-                        <label htmlFor="panel">Corner Radius
-                            <input type="text" id="panel" name="panel" placeholder="16px"onChange={
-                                (e) => {console.log( e.target.value )
 
-                                this.setState({ panelCorners: e.target.value })}
+                        <label htmlFor="panel">Corner Radius
+                            <input type="text" id="panel" name="panel" placeholder="16px" onChange={ 
+                                (e) => {
+                                    this.newStyles.panelCorners= e.target.value
+                                }
                             } />
                         </label>
+
                         <div>
                             <label>Color
                             <div style={ styles.swatch } onClick={ this.handleClick3 }>
@@ -207,7 +228,7 @@ class StyleForm extends Component {
                         </div>
                     </div>
                 </div>
-                <input className="hiddenInput" type="submit" onClick={this.props.onStyleChange} />
+                <input className="hiddenInput" type="submit" onClick={() => {this.props.onStyleChange(this.state.newStyles)}} />
             </form>
         );  
     }

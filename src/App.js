@@ -21,18 +21,20 @@ class App extends Component {
     this.state = {
       asideOpen: false,
       targetCard: null,
+      border:false,
       cards: [
         {
           titleText: 'Default card ID 0 Custom title',
           bodyText: 'Custom body text',
           cardId: 0,
-          titleSize:'36px',
-          titleColor: "",
+          titleSize: '36px',
+          titleColor: "#000000",
           bodySize: '16px',
-          bodyColor: "",
+          bodyColor: "#000000",
           panelCorners: '16px',
-          panelColor: "#FFFFFF"
+          panelColor: "#FFFFFF",
         },
+
       ],
     };
   }
@@ -46,7 +48,14 @@ class App extends Component {
       {
         titleText: `Custom title-${cardsArraySize}`,
         bodyText: 'Custom body text',
-        cardId: cardsArraySize
+        cardId: cardsArraySize,
+        titleSize:'36px',
+        titleColor: "#000000",
+        bodySize: '16px',
+        bodyColor: "#000000",
+        panelCorners: '16px',
+        panelColor: "#FFFFFF",
+        border:false
       },
     );
     this.setState({ cards: newCard });
@@ -102,8 +111,9 @@ class App extends Component {
       this.setState({ asideOpen: !this.state.asideOpen });
 
       //click this to collect ID of the specific card.
-
       this.setState({ targetCard: cardId })
+      this.setState({ border: !this.state.border })
+
       // console.log(cardId);
     };
 
@@ -136,29 +146,34 @@ class App extends Component {
 
     handleStyleChange = (newStyleContent) => {
       console.log(newStyleContent);
-      let newStylesArray = this.state.cards;
-      newStylesArray = newStylesArray.map((card, index) => {
+      let newCardArray = this.state.cards;
+      newCardArray = newCardArray.map((card, index) => {
         if ( card.cardId === this.state.targetCard) {
-          card = newStylesArray;
-          // console.log('card in map ',card);
-          // console.log('card.cardId ', card[card.cardId].titleSize);
+          console.log(newCardArray);
+
+          console.log('card in map ',card);
+          
+          let cardId = this.state.targetCard;
+          console.log(newStyleContent);
           // console.log(newStyleContent.titleSize);
-          console.log(index);
-          card[index].titleSize = newStyleContent.titleSize;
-          card[index].titleColor = newStyleContent.titleColor;
-          card[index].bodySize = newStyleContent.bodySize;
-          card[index].bodyColor = newStyleContent.bodyColor;
-          card[index].panelCorners = newStyleContent.panelCorners;
-          card[index].panelColor = newStylesArray.panelColor;
-          console.log(card)
+          console.log('cardId', cardId, index);
+          card.titleSize = newStyleContent.titleSize;
+          card.titleColor = newStyleContent.titleColor;
+          card.bodySize = newStyleContent.bodySize;
+          card.bodyColor = newStyleContent.bodyColor;
+          card.panelCorners = newStyleContent.panelCorners;
+          card.panelColor = newStyleContent.panelColor;
           return card;
         } else {
           return card;
         }
       })
-      // this.setState({
+      console.log(newCardArray)
 
-      // })
+      this.setState({
+        cards: newCardArray
+      })
+      console.log(this.state)
     }
 
 
@@ -166,16 +181,27 @@ class App extends Component {
 
   render() {
     this.checkCardsLeft();
+    let styleChange;
+    let borderChange = () => {
+      if (this.state.asideOpen === true) {
+        styleChange = 'addBorder';
+        console.log(styleChange);
+      } else {
+        styleChange = 'noBorder';
+        console.log(styleChange);
 
+      }
+    }
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
-      console.log(this.state);
+      console.log(card);
+
       return (
-        <div className="card" key={index} id={'card-'+index} data-id={index}>
+        <div className={"card "+ styleChange} key={index} id={'card-'+index} data-id={index} onClick={borderChange()}>
           {/* {this.handleChange} */}
           <div className="cardTitle">
-            <h2>{this.state.cards[index].titleText}</h2>
+            <h2 >{this.state.cards[index].titleText}</h2>
             <div className="cardOptions">
               <Button
                 type="link"

@@ -15,12 +15,8 @@ class Form extends Component {
         
         const handleSubmit = (e) => {
                 e.preventDefault();
-                console.log(this.state)
-
-                console.log(this.props);
 
                 this.props.onChangeValue(this.state);
-                
             }
 
             const onEnterPress = e => {
@@ -39,8 +35,6 @@ class Form extends Component {
                         name="title" 
                         placeholder="Enter custom title"  
                         onChange={(e) => {
-                        console.log( e.target.value )
-                    
                         this.setState({ titleText: e.target.value })
                     }}/>
                 </label>
@@ -51,8 +45,7 @@ class Form extends Component {
                         rows="5" 
                         cols="50" 
                         placeholder="Enter custom text" 
-                        onChange={(e) => {console.log( e.target.value )
-                    
+                        onChange={(e) => {
                         this.setState({ bodyText: e.target.value })
                         }}
                         onKeyPress={onEnterPress}
