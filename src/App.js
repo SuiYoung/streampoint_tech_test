@@ -181,7 +181,8 @@ class App extends Component {
   render() {
     this.checkCardsLeft();
     
-    //define cards and duplicate based on array in state
+    //define cards and duplicate based on array in state 
+    //refactor this section into it's own components if there's time.
     let cards;
     cards = this.state.cards.map((card, index) => {
 
