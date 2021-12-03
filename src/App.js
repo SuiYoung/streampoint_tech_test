@@ -1,5 +1,6 @@
 //import functions from React library
 import React, { Component } from "react";
+import reactCSS from "reactcss";
 // import css for the App Component
 import "./App.css";
 //import css for the antd design for react
@@ -172,6 +173,29 @@ class App extends Component {
 
   render() {
     this.checkCardsLeft();
+
+    const stateStyles = reactCSS({
+      'default': {
+        titleColor: {
+          color: `${this.state.titleColor}`
+        },
+        titleSize: {
+          fontSize: `${this.state.titleSize}`
+        },
+        bodyColor: {
+          color: `${this.state.bodyColor}`
+        },
+        bodySize: {
+          fontSize: `${this.state.bodySize}`
+        },
+        panelColor: {
+          background: `${this.state.panelColor}`
+        },
+        panelCorners: {
+          borderRadius: `${this.state.panelCorners}`
+        }
+      }
+    })
     
     let styleChange;
     let borderChange = () => {
@@ -190,7 +214,7 @@ class App extends Component {
       console.log(card);
 
       return (
-        <div className={"card " + styleChange} key={index} id={'card-'+index} data-id={index}>
+        <div className={"card " + styleChange} key={index} id={'card-'+index} data-id={index} onClick={borderChange()}>
           {this.borderChange}
           <div className="cardTitle">
             <h2 >{this.state.cards[index].titleText}</h2>
