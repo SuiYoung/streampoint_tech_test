@@ -113,7 +113,7 @@ class App extends Component {
       //click this to collect ID of the specific card.
       this.setState({ targetCard: cardId })
       this.setState({ border: !this.state.border })
-
+      
       // console.log(cardId);
     };
 
@@ -145,18 +145,10 @@ class App extends Component {
     }
 
     handleStyleChange = (newStyleContent) => {
-      console.log(newStyleContent);
       let newCardArray = this.state.cards;
       newCardArray = newCardArray.map((card, index) => {
         if ( card.cardId === this.state.targetCard) {
-          console.log(newCardArray);
-
-          console.log('card in map ',card);
-          
           let cardId = this.state.targetCard;
-          console.log(newStyleContent);
-          // console.log(newStyleContent.titleSize);
-          console.log('cardId', cardId, index);
           card.titleSize = newStyleContent.titleSize;
           card.titleColor = newStyleContent.titleColor;
           card.bodySize = newStyleContent.bodySize;
@@ -168,12 +160,11 @@ class App extends Component {
           return card;
         }
       })
-      console.log(newCardArray)
 
       this.setState({
         cards: newCardArray
       })
-      console.log(this.state)
+      // console.log(this.state)
     }
 
 
@@ -181,6 +172,7 @@ class App extends Component {
 
   render() {
     this.checkCardsLeft();
+    
     let styleChange;
     let borderChange = () => {
       if (this.state.asideOpen === true) {
@@ -189,8 +181,8 @@ class App extends Component {
       } else {
         styleChange = 'noBorder';
         console.log(styleChange);
-
       }
+      console.log(styleChange)
     }
     //define cards and duplicate based on array in state
     let cards;
@@ -198,8 +190,8 @@ class App extends Component {
       console.log(card);
 
       return (
-        <div className={"card "+ styleChange} key={index} id={'card-'+index} data-id={index} onClick={borderChange()}>
-          {/* {this.handleChange} */}
+        <div className={"card " + styleChange} key={index} id={'card-'+index} data-id={index}>
+          {this.borderChange}
           <div className="cardTitle">
             <h2 >{this.state.cards[index].titleText}</h2>
             <div className="cardOptions">
@@ -239,7 +231,7 @@ class App extends Component {
     });
 
     //written ternary syntax alternative to conditional if statement
-    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} onStyleChange={this.handleStyleChange} currentCardId={this.state.targetCard}/> : null;
+    let drawer = this.state.asideOpen === true ? <Aside onChangeValue={this.handleChangeValue} onStyleChange={(e) => {this.handleStyleChange(e)}} currentCardId={this.state.targetCard}/> : null;
 
 
 

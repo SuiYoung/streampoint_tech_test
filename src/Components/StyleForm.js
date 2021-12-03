@@ -89,7 +89,7 @@ class StyleForm extends Component {
             this.setState({ displayColorPicker3: false })
         };
 
-        handleChange3 = (colorPicked3) => {
+        handleChange3 = (colorPicked3, e) => {
             let newColor3 = {...this.state.color3};
             newColor3.hex = colorPicked3.hex;
             this.setState({ color3: colorPicked3 })
@@ -134,8 +134,14 @@ class StyleForm extends Component {
                 break;
             default:
         return null;
-    }
-  };
+            }
+        };
+
+        sendDataToParent = (e) => {
+            e.preventDefault();
+            this.props.onStyleChange(this.state.newStyles)
+        }
+        
 
         render() {
 
@@ -184,7 +190,7 @@ class StyleForm extends Component {
 
 
         return(
-            <form className="styleForm" onSubmit={() => {this.props.onStyleChange(this.state.newStyles)}}>
+            <form className="styleForm" onSubmit={(e) => {this.sendDataToParent(e)}}>
                 <div className="formFieldSet">
                     <h3>Title</h3>
                     <div className="formFlex">
@@ -194,7 +200,8 @@ class StyleForm extends Component {
                                 this.handleStyleChange({
                                   style: "titleSize",
                                   value: e.target.value,
-                                });
+                                },e 
+                                );
                               }} />
                         </label>
 
@@ -222,7 +229,8 @@ class StyleForm extends Component {
                                 this.handleStyleChange({
                                   style: "bodySize",
                                   value: e.target.value,
-                                });
+                                },e
+                                );
                               }} />
                         </label>
 
@@ -248,7 +256,8 @@ class StyleForm extends Component {
                                 this.handleStyleChange({
                                     style: "panelCorners",
                                     value: e.target.value,
-                                });
+                                },e
+                                );
                             }} />
                         </label>
 
