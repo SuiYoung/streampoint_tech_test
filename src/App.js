@@ -249,7 +249,7 @@ class App extends Component {
             </div>
           </div>
           <div className="cardBody">
-            {/* This will be a component that recieves input via props */}
+            {/* This will be a component that receives input via props */}
             <p style={stateStyles.bodyStyles}>{this.state.cards[index].bodyText}</p>
           </div>
         </div>
