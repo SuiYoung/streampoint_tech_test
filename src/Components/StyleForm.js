@@ -137,13 +137,20 @@ class StyleForm extends Component {
             }
         };
 
-        sendDataToParent = (e) => {
-            e.preventDefault();
-            this.props.onStyleChange(this.state.newStyles)
-        }
         
-
         render() {
+            
+            const sendDataToParent = (e) => {
+                e.preventDefault();
+                this.props.onStyleChange(this.state.newStyles)
+            }
+            
+            const onEnterPress = e => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    // e.preventDefault();
+                    sendDataToParent(e); // this won't be triggered
+                }
+            };
 
             const styles = reactCSS({
                 'default': {
@@ -258,7 +265,8 @@ class StyleForm extends Component {
                                     value: e.target.value,
                                 },e
                                 );
-                            }} />
+                            }}
+                            onKeyPress={onEnterPress} />
                         </label>
 
                         <div>
@@ -274,7 +282,6 @@ class StyleForm extends Component {
                         </div>
                     </div>
                 </div>
-                <input className="hiddenInput" type="submit"/>
             </form>
         );  
     }
