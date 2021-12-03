@@ -173,51 +173,47 @@ class App extends Component {
 
   render() {
     this.checkCardsLeft();
-
-    const stateStyles = reactCSS({
-      'default': {
-        titleColor: {
-          color: `${this.state.titleColor}`
-        },
-        titleSize: {
-          fontSize: `${this.state.titleSize}`
-        },
-        bodyColor: {
-          color: `${this.state.bodyColor}`
-        },
-        bodySize: {
-          fontSize: `${this.state.bodySize}`
-        },
-        panelColor: {
-          background: `${this.state.panelColor}`
-        },
-        panelCorners: {
-          borderRadius: `${this.state.panelCorners}`
-        }
-      }
-    })
     
-    let styleChange;
-    let borderChange = () => {
-      if (this.state.asideOpen === true) {
-        styleChange = 'addBorder';
-        console.log(styleChange);
-      } else {
-        styleChange = 'noBorder';
-        console.log(styleChange);
-      }
-      console.log(styleChange)
-    }
+    //let styleChange;
+    //set function to watch for the drawer status to set the border on selected cards.
+    //let borderChange = () => {
+      // this.state.asideOpen === true ? styleChange = 'addBorder': styleChange = 'noBorder';
+      //console.log(styleChange)
+    //}
+
+    //set variables for each style change:
+    //let cardId = this.state.targetCard;
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
       console.log(card);
+      let cardId = card.cardId;
+
+      // define style object that will become insline styles to override css files with user styles
+      const stateStyles = reactCSS({
+        'default': {
+          titleStyles: {
+            color: `${card.titleColor}`,
+            fontSize: `${card.titleSize}`
+          },
+          bodyStyles: {
+            color: `${card.bodyColor}`,
+            fontSize: `${card.bodySize}`
+          },
+          panelStyles: {
+            background: `${card.panelColor}`,
+            borderRadius: `${card.panelCorners}`
+          },
+          border: {
+            border: '1px solid #00A3FF'
+          }
+        }
+      })
 
       return (
-        <div className={"card " + styleChange} key={index} id={'card-'+index} data-id={index} onClick={borderChange()}>
-          {this.borderChange}
+        <div className={"card " + stateStyles.border} style={stateStyles.panelStyles} key={index} id={'card-'+index} data-id={index}>
           <div className="cardTitle">
-            <h2 >{this.state.cards[index].titleText}</h2>
+            <h2 style={stateStyles.titleStyles}>{this.state.cards[index].titleText}</h2>
             <div className="cardOptions">
               <Button
                 type="link"
@@ -248,7 +244,7 @@ class App extends Component {
           </div>
           <div className="cardBody">
             {/* This will be a component that recieves input via props */}
-            <p>{this.state.cards[index].bodyText}</p>
+            <p style={stateStyles.bodyStyles}>{this.state.cards[index].bodyText}</p>
           </div>
         </div>
       );
