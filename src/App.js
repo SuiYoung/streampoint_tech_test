@@ -25,15 +25,16 @@ class App extends Component {
       border:false,
       cards: [
         {
-          titleText: 'Default card ID 0 Custom title',
+          titleText: 'Custom title',
           bodyText: 'Custom body text',
           cardId: 0,
-          titleSize: '36px',
+          titleSize: '25px',
           titleColor: "#000000",
-          bodySize: '16px',
+          bodySize: '14px',
           bodyColor: "#000000",
           panelCorners: '16px',
           panelColor: "#FFFFFF",
+          border: '1px solid #00A3FF'
         },
 
       ],
@@ -47,7 +48,7 @@ class App extends Component {
     let cardsArraySize = this.state.cards.length;
     newCard.push(
       {
-        titleText: `Custom title-${cardsArraySize}`,
+        titleText: `Custom title`,
         bodyText: 'Custom body text',
         cardId: cardsArraySize,
         titleSize:'36px',
@@ -56,7 +57,7 @@ class App extends Component {
         bodyColor: "#000000",
         panelCorners: '16px',
         panelColor: "#FFFFFF",
-        border:false
+        border: '1px solid #00A3FF'
       },
     );
     this.setState({ cards: newCard });
@@ -205,13 +206,17 @@ class App extends Component {
             borderRadius: `${card.panelCorners}`
           },
           border: {
-            border: '1px solid #00A3FF'
+            border: '1px solid #00A3FF',
+            background: `${card.panelColor}`,
+            borderRadius: `${card.panelCorners}`
           }
         }
       })
 
+      const panelOptions = this.state.asideOpen === true ? stateStyles.border : stateStyles.panelStyles;
+
       return (
-        <div className={"card " + stateStyles.border} style={stateStyles.panelStyles} key={index} id={'card-'+index} data-id={index}>
+        <div className="card" style={panelOptions} key={index} id={'card-'+index} data-id={index}>
           <div className="cardTitle">
             <h2 style={stateStyles.titleStyles}>{this.state.cards[index].titleText}</h2>
             <div className="cardOptions">
