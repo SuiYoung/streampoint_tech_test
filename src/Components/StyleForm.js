@@ -22,9 +22,9 @@ class StyleForm extends Component {
                 hex: '#000000',
                 },
             newStyles: {
-                titleSize:'36px',
+                titleSize:'25px',
                 titleColor: "#00000",
-                bodySize: '16px',
+                bodySize: '14px',
                 bodyColor: "#00000",
                 panelCorners: '16px',
                 panelColor: "#FFFFFF"
