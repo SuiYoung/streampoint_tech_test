@@ -34,7 +34,7 @@ class App extends Component {
           bodyColor: "#000000",
           panelCorners: '16px',
           panelColor: "#FFFFFF",
-          border: '1px solid #00A3FF'
+          border: 'none'
         },
 
       ],
@@ -57,7 +57,7 @@ class App extends Component {
         bodyColor: "#000000",
         panelCorners: '16px',
         panelColor: "#FFFFFF",
-        border: '1px solid #00A3FF'
+        border: 'none'
       },
     );
     this.setState({ cards: newCard });
@@ -75,8 +75,6 @@ class App extends Component {
         }
       }
 
-      // const currentCards = [...this.state.cards];
-      // currentCards.splice(cardId, 1);
       this.setState({ cards: currentCards });
       this.checkCardsLeft();
     }
@@ -116,7 +114,6 @@ class App extends Component {
       this.setState({ targetCard: cardId })
       this.setState({ border: !this.state.border })
       
-      // console.log(cardId);
     };
 
     //set toggle off when clicking off the aside only if the aside is open.
@@ -130,11 +127,11 @@ class App extends Component {
 
     //callback function to pull form input data from aside form child components.
     handleChangeValue = (newContent) => {
-      console.log(newContent)
-      let newCardArray = this.state.cards;
+      let newCardArray = [...this.state.cards];
       newCardArray = newCardArray.map((card) => {
         if (card.cardId === this.state.targetCard) {
-          card = newContent;
+          card.titleText = newContent.titleText;
+          card.bodyText = newContent.bodyText;
           card.cardId = this.state.targetCard;
           return card;
         } else {
@@ -150,7 +147,6 @@ class App extends Component {
       let newCardArray = this.state.cards;
       newCardArray = newCardArray.map((card, index) => {
         if ( card.cardId === this.state.targetCard) {
-          let cardId = this.state.targetCard;
           card.titleSize = newStyleContent.titleSize;
           card.titleColor = newStyleContent.titleColor;
           card.bodySize = newStyleContent.bodySize;
@@ -166,29 +162,28 @@ class App extends Component {
       this.setState({
         cards: newCardArray
       })
-      // console.log(this.state)
     }
 
-
+    handleSelectedCardBorder = () => {
+      let selectedCardArray = this.state.cards;
+      selectedCardArray = selectedCardArray.map((card, index) => {
+        if (card.id === this.state.targetCard) {
+          card.border = '1px solid #00A3FF'
+          return card;
+        } else {
+          return card;
+        }
+      })
+      this.setState({ cards: selectedCardArray })
+    }
 
 
   render() {
     this.checkCardsLeft();
     
-    //let styleChange;
-    //set function to watch for the drawer status to set the border on selected cards.
-    //let borderChange = () => {
-      // this.state.asideOpen === true ? styleChange = 'addBorder': styleChange = 'noBorder';
-      //console.log(styleChange)
-    //}
-
-    //set variables for each style change:
-    //let cardId = this.state.targetCard;
     //define cards and duplicate based on array in state
     let cards;
     cards = this.state.cards.map((card, index) => {
-      console.log(card);
-      let cardId = card.cardId;
 
       // define style object that will become insline styles to override css files with user styles
       const stateStyles = reactCSS({
@@ -206,6 +201,11 @@ class App extends Component {
             borderRadius: `${card.panelCorners}`
           },
           border: {
+            border: `${card.border}`,
+            background: `${card.panelColor}`,
+            borderRadius: `${card.panelCorners}`
+          },
+          borderCardActive: {
             border: '1px solid #00A3FF',
             background: `${card.panelColor}`,
             borderRadius: `${card.panelCorners}`
@@ -213,10 +213,10 @@ class App extends Component {
         }
       })
 
-      const panelOptions = this.state.asideOpen === true ? stateStyles.border : stateStyles.panelStyles;
-
       return (
-        <div className="card" style={panelOptions} key={index} id={'card-'+index} data-id={index}>
+        <div className="card" style={
+          card.cardId === this.state.targetCard ? stateStyles.borderCardActive : stateStyles.border
+        } key={index} id={'card-'+index} data-id={index} >
           <div className="cardTitle">
             <h2 style={stateStyles.titleStyles}>{this.state.cards[index].titleText}</h2>
             <div className="cardOptions">

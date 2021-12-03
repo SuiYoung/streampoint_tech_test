@@ -6,7 +6,7 @@ class Form extends Component {
         this.state={
             titleText:"",
             bodyText:"",
-            cardID:""
+            cardId: ""
         };
     }
 
