@@ -145,10 +145,11 @@ class StyleForm extends Component {
                 this.props.onStyleChange(this.state.newStyles)
             }
             
+            // press enter to submit the information to state
             const onEnterPress = e => {
                 if (e.key === "Enter" && !e.shiftKey) {
                     // e.preventDefault();
-                    sendDataToParent(e); // this won't be triggered
+                    sendDataToParent(e); 
                 }
             };
 

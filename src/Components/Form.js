@@ -18,11 +18,12 @@ class Form extends Component {
 
                 this.props.onChangeValue(this.state);
             }
-
+            
+        // press enter to submit the information to state
         const onEnterPress = e => {
             if (e.key === "Enter" && !e.shiftKey) {
                 // e.preventDefault();
-                handleSubmit(e); // this won't be triggered
+                handleSubmit(e); 
             }
         };
 
