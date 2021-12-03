@@ -13,22 +13,13 @@ class StyleForm extends Component {
             displayColorPicker2: false,
             displayColorPicker3: false,
             color:{
-                r: '14',
-                g: '39',
-                b: '72',
-                a: '0',
+                hex: '#000000',
                 },
             color2:{
-                r: '79',
-                g: '79',
-                b: '79',
-                a: '0',
+                hex: '#000000',
                 },
             color3:{
-                r: '255',
-                g: '255',
-                b: '255',
-                a: '0',
+                hex: '#000000',
                 },
             newStyles: {
                 titleSize:'36px',
@@ -49,7 +40,7 @@ class StyleForm extends Component {
             panelCorners: "",
             panelColor: ""
         } 
-        
+        //title color
         handleClick = () => {
             this.setState({ displayColorPicker: !this.state.displayColorPicker })
         };
@@ -58,10 +49,18 @@ class StyleForm extends Component {
             this.setState({ displayColorPicker: false })
         };
 
-        handleChange = (color) => {
-            this.setState({ color: color.rgb })
+        handleChange = (colorPicked) => {
+            let newColor = {...this.state.color};
+            newColor.hex = colorPicked.hex;
+            this.setState({ color: newColor });
+
+            this.handleStyleChange({
+                style: "titleColor",
+                value: colorPicked.hex,
+            });
         };
 
+        //body color
         handleClick2 = () => {
             this.setState({ displayColorPicker2: !this.state.displayColorPicker2 })
         };
@@ -70,10 +69,18 @@ class StyleForm extends Component {
             this.setState({ displayColorPicker2: false })
         };
 
-        handleChange2 = (color2) => {
-            this.setState({ color2: color2.rgb })
+        handleChange2 = (colorPicked2) => {
+            let newColor2 = {...this.state.color2};
+            newColor2.hex = colorPicked2.hex;
+            this.setState({ color2: colorPicked2 })
+
+            this.handleStyleChange({
+                style: "bodyColor",
+                value: colorPicked2.hex,
+            });
         };
 
+        //panel color
         handleClick3 = () => {
             this.setState({ displayColorPicker3: !this.state.displayColorPicker3 })
         };
@@ -82,21 +89,53 @@ class StyleForm extends Component {
             this.setState({ displayColorPicker3: false })
         };
 
-        handleChange3 = (color3) => {
-            this.setState({ color3: color3.rgb })
+        handleChange3 = (colorPicked3) => {
+            let newColor3 = {...this.state.color3};
+            newColor3.hex = colorPicked3.hex;
+            this.setState({ color3: colorPicked3 })
+
+            this.handleStyleChange({
+                style: "panelColor",
+                value: colorPicked3.hex,
+            });
         };
 
-        handleStyleSubmit = (newStyles) => {
-            // console.log(this.state.newStyles);
-
-            this.setState({ 
-                newStyles: newStyles
-            });
-
-            // console.log(this.state.newStyles);
-
-            this.props.onStyleChange(this.state.newStyles);
-        }
+        handleStyleChange = (styleChanged) => {
+            switch (styleChanged.style) {
+            case "titleSize":
+                let stateTitle = { ...this.state.newStyles };
+                stateTitle.titleSize = styleChanged.value;
+                this.setState({ newStyles: stateTitle });
+                break;
+            case "titleColor":
+                let stateTitleColor = { ...this.state.newStyles };
+                stateTitleColor.titleColor = styleChanged.value;
+                this.setState({ newStyles: stateTitleColor });
+                break;
+            case "bodySize":
+                let stateBody = { ...this.state.newStyles };
+                stateBody.bodySize = styleChanged.value;
+                this.setState({ newStyles: stateBody });
+                break;
+            case "bodyColor":
+                let bodyColor = { ...this.state.newStyles };
+                bodyColor.bodyColor = styleChanged.value;
+                this.setState({ newStyles: bodyColor });
+                break;
+            case "panelCorners":
+                let statePanel = { ...this.state.newStyles };
+                statePanel.panelCorners = styleChanged.value;
+                this.setState({ newStyles: statePanel });
+                break;
+            case "panelColor":
+                let panelColor = { ...this.state.newStyles };
+                panelColor.panelColor = styleChanged.value;
+                this.setState({ newStyles: panelColor });
+                break;
+            default:
+        return null;
+    }
+  };
 
         render() {
 
@@ -106,38 +145,38 @@ class StyleForm extends Component {
                         width: '30px',
                         height: '30px',
                         borderRadius: '2px',
-                        background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
+                        background: `${this.state.color.hex}`,
                     },
                     color2: {
                         width: '30px',
                         height: '30px',
                         borderRadius: '2px',
-                        background: `rgba(${ this.state.color2.r }, ${ this.state.color2.g }, ${ this.state.color2.b }, ${ this.state.color2.a })`,
+                        background: `${this.state.color2.hex}`,
                         },
                     color3: {
                         width: '30px',
                         height: '30px',
                         borderRadius: '2px',
-                        background: `rgba(${ this.state.color3.r }, ${ this.state.color3.g }, ${ this.state.color3.b }, ${ this.state.color3.a })`,
+                        background: `${this.state.color3.hex}`,
                         },
                     swatch: {
-                    padding: '5px',
-                    background: '#fff',
-                    borderRadius: '1px',
-                    boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-                    display: 'inline-block',
-                    cursor: 'pointer',
+                        padding: '5px',
+                        background: '#fff',
+                        borderRadius: '1px',
+                        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+                        display: 'inline-block',
+                        cursor: 'pointer',
                     },
                     popover: {
-                    position: 'absolute',
-                    zIndex: '2',
+                        position: 'absolute',
+                        zIndex: '2',
                     },
                     cover: {
-                    position: 'fixed',
-                    top: '0px',
-                    right: '0px',
-                    bottom: '0px',
-                    left: '0px',
+                        position: 'fixed',
+                        top: '0px',
+                        right: '0px',
+                        bottom: '0px',
+                        left: '0px',
                     },
                 },
             });
@@ -145,32 +184,28 @@ class StyleForm extends Component {
 
 
         return(
-            <form className="styleForm" onSubmit={() => {this.handleStyleSubmit(this.newStyles)}}>
+            <form className="styleForm" onSubmit={() => {this.props.onStyleChange(this.state.newStyles)}}>
                 <div className="formFieldSet">
                     <h3>Title</h3>
                     <div className="formFlex">
                         <label htmlFor="titleSize">Size
                             <input type="text" id="titleSize" name="titleSize" placeholder="36px"
-                            onChange={ 
-                                (e) => {
-                                this.newStyles.titleSize = e.target.value;
-                                }
-                            } />
+                            onChange={(e) => {
+                                this.handleStyleChange({
+                                  style: "titleSize",
+                                  value: e.target.value,
+                                });
+                              }} />
                         </label>
 
                         <div>
-                            <label>Color
+                        <label>Color
                             <div style={ styles.swatch } onClick={ this.handleClick }>
                             <div style={ styles.color } />
                             </div>
                             { this.state.displayColorPicker ? <div style={ styles.popover }>
                             <div style={ styles.cover } onClick={ this.handleClose }/>
-                            <BlockPicker color={ this.state.color } onChange={
-                                () => {
-                                    console.log( this.state.color )
-
-                                // this.setState({ titleStyles: e.target.value })
-                            }}className="blockPicker1" />
+                                <BlockPicker color={ this.state.color } onChange={ this.handleChange } className="blockPicker1" />
                             </div> : null }
                             </label>
                         </div>
@@ -183,11 +218,12 @@ class StyleForm extends Component {
 
                         <label htmlFor="bodyStyle">Size
                             <input type="text" id="bodyStyle" name="bodyStyle" placeholder="16px"
-                            onChange={ 
-                                (e) => {
-                                    this.newStyles.bodySize= e.target.value
-                                }
-                             } />
+                            onChange={(e) => {
+                                this.handleStyleChange({
+                                  style: "bodySize",
+                                  value: e.target.value,
+                                });
+                              }} />
                         </label>
 
                         <div>
@@ -208,11 +244,12 @@ class StyleForm extends Component {
                     <div className="formFlex">
 
                         <label htmlFor="panel">Corner Radius
-                            <input type="text" id="panel" name="panel" placeholder="16px" onChange={ 
-                                (e) => {
-                                    this.newStyles.panelCorners= e.target.value
-                                }
-                            } />
+                            <input type="text" id="panel" name="panel" placeholder="16px" onChange={(e) => {
+                                this.handleStyleChange({
+                                    style: "panelCorners",
+                                    value: e.target.value,
+                                });
+                            }} />
                         </label>
 
                         <div>
@@ -228,7 +265,7 @@ class StyleForm extends Component {
                         </div>
                     </div>
                 </div>
-                <input className="hiddenInput" type="submit" onClick={() => {this.props.onStyleChange(this.state.newStyles)}} />
+                <input className="hiddenInput" type="submit"/>
             </form>
         );  
     }
