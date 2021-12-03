@@ -52,6 +52,7 @@ class Form extends Component {
                 >
                 </textarea>
             </label>
+            <input className="hiddenInput" type="submit" onClick={this.props.onChangeValue} /> 
         </form>
         
         ) 

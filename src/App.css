@@ -172,4 +172,12 @@ label textarea {
 .styleForm .blockPicker3 {
   top: 3.5rem;
 }
+.hiddenInput {
+  visibility: hidden;
+}
+@media only screen and (max-width: 768px) {
+  .hiddenInput {
+    visibility: visible;
+  }
+}
 /*# sourceMappingURL=App.css.map */

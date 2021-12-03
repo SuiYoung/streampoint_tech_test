@@ -282,6 +282,7 @@ class StyleForm extends Component {
                         </div>
                     </div>
                 </div>
+                <input className="hiddenInput" type="submit"/>
             </form>
         );  
     }
